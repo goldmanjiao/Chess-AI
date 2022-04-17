@@ -27,6 +27,8 @@ def main():
         for e in p.event.get():
             if e.type == p.QUIT:
                 running = False
+
+            #mouse handler
             elif e.type == p.MOUSEBUTTONDOWN:
                 location = p.mouse.get_pos()
                 col = location[0]//SQ_SIZE
@@ -44,7 +46,10 @@ def main():
                     sqSelected = ()
                     playerClicks = []
 
-
+            #key handlers
+            elif e.type == p.KEYDOWN:
+                if e.key == p.K_z:
+                    gs.undoMove()
 
         drawGameState(screen,gs)
         clock.tick(MAX_FPS)
@@ -57,7 +62,7 @@ def drawGameState(screen,gs):
     drawPieces(screen,gs.board)
 
 def drawBoard(screen):
-    colors = [p.Color("white"), p.Color("gray")]
+    colors = [p.Color(252,204,116), p.Color(87,58,46)]
     for r in range(DIMENSION):
         for c in range(DIMENSION):
             color = colors[((r+c)%2)]

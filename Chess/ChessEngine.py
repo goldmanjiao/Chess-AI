@@ -14,12 +14,22 @@ class Gamestate():
         ]
         self.whiteToMove = True
         self.moveLog = []
+    #takes a move then executes the move
 
     def makeMove(self,move):
         self.board[move.startRow][move.startCol] = "--" #empty space now moved
         self.board[move.endRow][move.endCol] = move.pieceMoved
         self.moveLog.append(move) #log moves
         self.whiteToMove = not self.whiteToMove #swap turns
+
+    #undo last move
+    def undoMove(self):
+        if len(self.moveLog) != 0:
+            move = self.moveLog.pop()
+            self.board[move.startRow][move.startCol] = move.pieceMoved
+            self.board[move.endRow][move.endCol] = move.pieceCaptured
+            self.whiteToMove = not self.whiteToMove
+
 
 class Move():
 
