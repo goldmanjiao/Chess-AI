@@ -1,4 +1,4 @@
-
+from tensorflow import Keras
 
 
 class Gamestate():
@@ -214,6 +214,24 @@ class Gamestate():
                     if not piecePinned or pinDirection == (1,1):
                         moves.append(Move((r,c),(r+1,c+1),self.board))
 
+    def AIdeeplearning():
+     #need to add keras modelnum_skipped = 0
+    for folder_name in (Keras):
+        folder_path = os.path.join("PetImages", folder_name)
+    for fname in os.listdir(folder_path):
+        fpath = os.path.join(folder_path, fname)
+        try:
+            fobj = open(fpath, "rb")
+            is_jfif = tf.compat.as_bytes("JFIF") in fobj.peek(10)
+        finally:
+            fobj.close()
+
+        if not is_jfif:
+            num_skipped += 1
+            # Delete corrupted image
+            os.remove(fpath)
+
+    def AI():
 
 
     def getRookMoves(self,r,c,moves):
