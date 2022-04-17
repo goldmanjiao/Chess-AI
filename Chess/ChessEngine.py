@@ -41,6 +41,12 @@ class Gamestate():
         elif move.pieceMoved == "bk":
             self.blackKingLocation = (move.endRow, move.endCol)
 
+        # if move.pieceMoved[1] == 'p' and abs(move.startRow - move.endRow) == 2:
+        #     self.enPassantPossible = ((move.endRow + move.startRow) //2, move.endCol)
+        # else:
+        #     if move.enPassant:
+        #         self.board[move.startRow][move.endCol] == "--"
+
 
     #undo last move
     def undoMove(self):
@@ -60,7 +66,6 @@ class Gamestate():
         
         moves = []
         self.in_Check, self.pins, self.checks = self.checkForPinsAndChecks()
-        print(self.in_Check)
 
         if self.whiteToMove:
             kingRow = self.whiteKingLocation[0]
@@ -98,6 +103,15 @@ class Gamestate():
                 self.getKingMoves(kingRow,kingCol,moves)
         else:
             moves = self.getAllPossibleMoves()
+        
+        if len(moves) == 0:
+            if self.inCheck():
+                self.checkMate = True
+            else:
+                self.staleMate = True
+        else:
+            self.checkMate = False
+            self.staleMate = False
 
         return moves
 
